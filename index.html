@@ -27,15 +27,8 @@
   <div class="arjs-loader">
     <div>Loading, please wait...</div>
   </div>
-  <a-scene vr-mode-ui="enabled: false;"
-    renderer="logarithmicDepthBuffer: true; precision: medium;"
-    embedded arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;"
-    onloaded="onARSceneLoaded()">
-    <a-nft type="nft" url="./trex-image-big.jpeg" smooth="true" smoothCount="10" smoothTolerance="0.01"
-      smoothThreshold="5" onmarkerfound="onMarkerFound" onmarkerlost="onMarkerLost">
+  <a-scene
       <a-entity gltf-model="./trex/scene.gltf" scale="5 5 5" position="1 1 -100"></a-entity>
-    </a-nft>
-    <a-entity camera></a-entity>
   </a-scene>
 
   <script>
