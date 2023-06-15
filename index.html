@@ -1,4 +1,4 @@
-<script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@1.3.0/dist/aframe-master.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/aframe@1.3.0/dist/aframe-master.min.js"></script>
 
 <style>
   .arjs-loader {
@@ -21,32 +21,42 @@
   }
 </style>
 
-<!-- rawgithack development URL -->
-<script src='https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js'></script>
-<!--<script src='../../../../aframe/build/aframe-ar-nft.js'></script>-->
+<script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
 
-
-<body style='margin : 0px; overflow: hidden;'>
-   <!-- minimal loader shown until image descriptors are loaded -->
+<body style="margin: 0px; overflow: hidden;">
   <div class="arjs-loader">
     <div>Loading, please wait...</div>
   </div>
-    <a-scene
-        vr-mode-ui='enabled: false;'
-        renderer="logarithmicDepthBuffer: true; precision: medium;"
-        embedded arjs='trackingMethod: best; sourceType: webcam; debugUIEnabled: false;'>
+  <a-scene vr-mode-ui="enabled: false;"
+    renderer="logarithmicDepthBuffer: true; precision: medium;"
+    embedded arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;"
+    onloaded="onARSceneLoaded()">
+    <a-nft type="nft" url="./trex-image-big.jpeg" smooth="true" smoothCount="10" smoothTolerance="0.01"
+      smoothThreshold="5" onmarkerfound="onMarkerFound" onmarkerlost="onMarkerLost">
+      <a-entity gltf-model="./trex/scene.gltf" scale="5 5 5" position="1 1 -100"></a-entity>
+    </a-nft>
+    <a-entity camera></a-entity>
+  </a-scene>
 
-        <!-- use rawgithack to retrieve the correct url for nft marker (see 'pinball' below) -->
-        <a-nft
-            type='nft' url='trex-image-big.jpeg'
-            smooth='true' smoothCount='10' smoothTolerance='0.01' smoothThreshold='5'>
-            <a-entity
-                gltf-model='trex/scene.gltf'
-                scale="1 1 1"
-                position="0 0 -100"
-                >
-            </a-entity>
-        </a-nft>
-		<a-entity camera></a-entity>
-    </a-scene>
+  <script>
+    function onARSceneLoaded() {
+      console.log("AR scene loaded successfully.");
+    }
+
+    function onMarkerFound() {
+      console.log("Marker found.");
+    }
+
+    function onMarkerLost() {
+      console.log("Marker lost.");
+    }
+
+    function onARSceneError() {
+      console.error("An error occurred while loading the AR scene.");
+    }
+
+    window.addEventListener("error", function (event) {
+      console.error("An error occurred:", event.error);
+    });
+  </script>
 </body>
